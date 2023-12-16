@@ -1,6 +1,7 @@
 package com.tijo.kw.hotel.room;
 
 import com.tijo.kw.hotel.room.domain.RoomFacade;
+import com.tijo.kw.hotel.room.dto.MakeRoomDto;
 import com.tijo.kw.hotel.room.dto.RoomDto;
 import com.tijo.kw.hotel.room.dto.RoomWithTypeDto;
 import com.tijo.kw.hotel.room.dto.TypeOfRoomDto;
@@ -23,7 +24,7 @@ public class RoomController {
 
     @PostMapping(value ="")
     @Operation(summary = "Adds room and returns it")
-    public ResponseEntity<RoomDto> addRoom(@RequestBody RoomDto room){
+    public ResponseEntity<RoomDto> addRoom(@RequestBody MakeRoomDto room){
         return ResponseEntity.ok(roomFacade.addRoom(room));
     }
 

@@ -1,6 +1,7 @@
 package com.tijo.kw.hotel.room.domain;
 
 import com.tijo.kw.hotel.reservation.dto.ReservationRangeDto;
+import com.tijo.kw.hotel.room.dto.MakeRoomDto;
 import com.tijo.kw.hotel.room.dto.RoomDto;
 import com.tijo.kw.hotel.room.dto.RoomWithTypeDto;
 import com.tijo.kw.hotel.room.dto.TypeOfRoomDto;
@@ -28,8 +29,9 @@ public class RoomFacade {
         this.typeOfRoomRepository = typeOfRoomRepository;
     }
 
-    public RoomDto addRoom(RoomDto newRoom) {
+    public RoomDto addRoom(MakeRoomDto makeRoom) {
 
+        RoomDto newRoom = makeRoom.toRoomDto();
         newRoom.validate();
 
         if (ifRoomExistsByNumber(newRoom.getNumber())) {
