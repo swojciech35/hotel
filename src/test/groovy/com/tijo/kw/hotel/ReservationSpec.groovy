@@ -28,15 +28,17 @@ class ReservationSpec extends Specification implements RoomSample, TypeOfRoomSam
 
     ReservationFacade reservationFacade = new ReservationFacade(reservationRepository, roomFacade, Mock(AuthenticationService));
 
+    UUID typeId;
+    UUID roomId;
 
     def setup() {
-        roomFacade.addTypeOfRoom(createTypeOfRoom())
-        roomFacade.addRoom(createRoom())
+        typeId = roomFacade.addTypeOfRoom(createTypeOfRoomRequest()).getId()
+        roomId = roomFacade.addRoom(createRoomRequest([typeId: typeId])).getId()
     }
 
     def "New room should be available"() {
         expect:
-        reservationFacade.getAvailableTypesOfRoomIds(new ReservationRangeDto(START_DATE, END_DATE)) == [ROOM_TYPE_ID]
+        reservationFacade.getAvailableTypesOfRoomIds(new ReservationRangeDto(START_DATE, END_DATE)) == [typeId]
     }
 
     def "User should make reservation of existing room"() {
@@ -44,13 +46,13 @@ class ReservationSpec extends Specification implements RoomSample, TypeOfRoomSam
         def reservation = reservationFacade.makeReservation(MakeReservationDto.builder()
                 .allInclusive(true)
                 .userId(USER_ID)
-                .typeOfRoomId(ROOM_TYPE_ID)
+                .typeOfRoomId(typeId)
                 .reservationRange(new ReservationRangeDto(START_DATE, END_DATE))
                 .build())
         then:
         reservationFacade.getAvailableTypesOfRoomIds(new ReservationRangeDto(START_DATE, END_DATE)) == []
         and:
-        reservation == createReservation([id: reservation.getId()])
+        reservation == createReservation([id: reservation.getId(), roomId: roomId])
 
     }
 
@@ -71,10 +73,10 @@ class ReservationSpec extends Specification implements RoomSample, TypeOfRoomSam
         reservationFacade.makeReservation(MakeReservationDto.builder()
                 .allInclusive(true)
                 .userId(USER_ID)
-                .typeOfRoomId(ROOM_TYPE_ID)
+                .typeOfRoomId(typeId)
                 .reservationRange(new ReservationRangeDto(START_DATE, END_DATE))
                 .build())
-        when: "User wants to make reservation on overlappng dates"
+        when: "User wants to make reservation on overlapping dates"
         List<UUID> types = reservationFacade.getAvailableTypesOfRoomIds(new ReservationRangeDto(RESERVATION_START_DATE, RESERVATION_END_DATE))
         then: "There are no available types of room"
         types.isEmpty()
