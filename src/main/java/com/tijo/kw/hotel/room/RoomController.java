@@ -1,10 +1,7 @@
 package com.tijo.kw.hotel.room;
 
 import com.tijo.kw.hotel.room.domain.RoomFacade;
-import com.tijo.kw.hotel.room.dto.MakeRoomDto;
-import com.tijo.kw.hotel.room.dto.RoomDto;
-import com.tijo.kw.hotel.room.dto.RoomWithTypeDto;
-import com.tijo.kw.hotel.room.dto.TypeOfRoomDto;
+import com.tijo.kw.hotel.room.dto.*;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +27,7 @@ public class RoomController {
 
     @PostMapping(value ="/type")
     @Operation(summary = "Adds type of room and returns it")
-    public ResponseEntity<TypeOfRoomDto> addTypeOfRoom(@RequestBody TypeOfRoomDto typeOfRoom){
+    public ResponseEntity<TypeOfRoomDto> addTypeOfRoom(@RequestBody MakeTypeOfRoomDto typeOfRoom){
         return ResponseEntity.ok(roomFacade.addTypeOfRoom(typeOfRoom));
     }
 
