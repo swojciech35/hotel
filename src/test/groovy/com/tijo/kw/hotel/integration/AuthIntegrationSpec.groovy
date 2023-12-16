@@ -1,35 +1,11 @@
 package com.tijo.kw.hotel.integration
-
-import com.fasterxml.jackson.databind.ObjectMapper
 import com.tijo.kw.hotel.samples.UserSample
 import com.tijo.kw.hotel.security.auth.AuthenticationRequest
-import org.junit.runner.RunWith
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.MediaType
-import org.springframework.test.context.junit4.SpringRunner
-import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.MvcResult
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
-import org.springframework.test.web.servlet.setup.MockMvcBuilders
-import org.springframework.web.context.WebApplicationContext
-import spock.lang.Specification
 
-
-@RunWith(SpringRunner.class)
-@SpringBootTest
-class AuthIntegrationSpec extends Specification implements UserSample{
-    @Autowired
-    private WebApplicationContext context
-
-    private MockMvc mockMvc;
-
-    private ObjectMapper om = new ObjectMapper();
-
-    def setup() {
-        mockMvc = MockMvcBuilders.webAppContextSetup(context).build()
-     //   mockMvc.perform(MockMvcRequestBuilders.post("/api/auth/register").content(om.writeValueAsString(REGISTER_REQUEST)))
-    }
+class AuthIntegrationSpec extends IntegrationSpec implements UserSample {
 
     def "Guest should register on new email"() {
         when: "Guest register on new email"
