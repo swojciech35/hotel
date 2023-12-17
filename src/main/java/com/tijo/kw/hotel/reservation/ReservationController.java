@@ -43,4 +43,10 @@ public class ReservationController {
     public ResponseEntity<List<UUID>> getAvailableTypesOfRoomIds(@RequestBody ReservationRangeDto reservationRange) {
         return ResponseEntity.ok(reservationFacade.getAvailableTypesOfRoomIds(reservationRange));
     }
+
+    @GetMapping(value = "")
+    @Operation(summary = "Returns list of types of room' that haveat least one room")
+    public ResponseEntity<List<TypeOfRoomDto>> getTypesOfRoomWithRooms() {
+        return ResponseEntity.ok(reservationFacade.getTypesOfRoomWithRooms());
+    }
 }

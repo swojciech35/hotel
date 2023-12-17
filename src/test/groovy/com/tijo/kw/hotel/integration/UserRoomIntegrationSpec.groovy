@@ -16,23 +16,23 @@ class UserRoomIntegrationSpec extends IntegrationSpec implements UserSample, Roo
 
     def "Logged user should get list of types of room"() {
         when: "User gets list of types of room"
-        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/api/room")).andReturn()
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/api/reservation")).andReturn()
         then: "The list is empty"
         List<TypeOfRoomDto> list = om.readValue(result.getResponse().getContentAsString(), List<TypeOfRoomDto>.class)
-        list == []
+        list.isEmpty()
     }
 
     def "Logged user can't add new room"() {
         when: "User tries to add room"
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/api/room").contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsString(createRoom()))).andReturn()
         then: "User can't add room"
-        result.getResponse().status != 200
+        result.getResponse().status == 401
     }
 
     def "Logged user can't add new type of room"() {
         when: "User tries to add type of room"
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/api/room/type").contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsString(createTypeOfRoom()))).andReturn()
         then: "User can't add room"
-        result.getResponse().status != 200
+        result.getResponse().status == 401
     }
 }

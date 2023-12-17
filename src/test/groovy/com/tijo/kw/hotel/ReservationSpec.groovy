@@ -36,10 +36,22 @@ class ReservationSpec extends Specification implements RoomSample, TypeOfRoomSam
         roomId = roomFacade.addRoom(createRoomRequest([typeId: typeId])).getId()
     }
 
-    def "New room should be available"() {
+    def "New type of room with room should be available"() {
         expect:
         reservationFacade.getAvailableTypesOfRoomIds(new ReservationRangeDto(START_DATE, END_DATE)) == [typeId]
+        and:
+        reservationFacade.getTypesOfRoomWithRooms() == [createTypeOfRoom([id: typeId])]
     }
+
+    def "Type of room without room shouldn't be available"() {
+        when:
+       roomFacade.addTypeOfRoom(createTypeOfRoomRequest())
+        then:
+        reservationFacade.getAvailableTypesOfRoomIds(new ReservationRangeDto(START_DATE, END_DATE)) == [typeId]
+        and:
+        reservationFacade.getTypesOfRoomWithRooms() == [createTypeOfRoom([id: typeId])]
+    }
+
 
     def "User should make reservation of existing room"() {
         when:
