@@ -37,8 +37,8 @@ public class AuthenticationService {
       throw new UserAlreadyExists("User with email " + request.getEmail() + " is already exist");
     }
     var user = User.builder()
-            .name(request.getFirstName())
-            .surname(request.getLastName())
+            .name(request.getName())
+            .surname(request.getSurname())
             .email(request.getEmail())
             .password(passwordEncoder.encode(request.getPassword()))
             .role(Role.USER)

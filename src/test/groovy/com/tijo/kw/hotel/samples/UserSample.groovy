@@ -34,8 +34,8 @@ trait UserSample {
 
 
     RegisterRequest REGISTER_REQUEST = RegisterRequest.builder()
-            .firstName("Jan")
-            .lastName("Kowalski")
+            .name("Jan")
+            .surname("Kowalski")
             .email(USER_EMAIL)
             .password(USER_PASSWORD)
             .build()
