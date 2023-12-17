@@ -9,7 +9,7 @@ public class PostgresContainerStarter {
   public static void init() {
     postgreSQLContainer = (PostgreSQLContainer) new PostgreSQLContainer(
             "postgres:13.1")
-            .withDatabaseName("ppcw")
+            .withDatabaseName("hotel")
             .withUsername("postgres")
             .withPassword("postgres").withStartupTimeout(Duration.ofSeconds(600));
     postgreSQLContainer.start();

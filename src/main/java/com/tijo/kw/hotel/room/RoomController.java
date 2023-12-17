@@ -2,6 +2,7 @@ package com.tijo.kw.hotel.room;
 
 import com.tijo.kw.hotel.room.domain.RoomFacade;
 import com.tijo.kw.hotel.room.dto.*;
+import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -67,4 +68,10 @@ public class RoomController {
         return ResponseEntity.ok(roomFacade.getTypeOfRoom(typeOfRoomId));
     }
 
+    @Hidden
+    @PostMapping("/cleanup")
+    public ResponseEntity<Boolean> cleanup() {
+        roomFacade.cleanup();
+        return ResponseEntity.ok(true);
+    }
 }

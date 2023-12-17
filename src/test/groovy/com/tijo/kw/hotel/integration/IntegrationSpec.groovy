@@ -5,6 +5,7 @@ import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.MediaType
+import org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
@@ -17,16 +18,15 @@ import org.springframework.test.context.junit4.SpringRunner
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @Testcontainers
-abstract class IntegrationSpec extends Specification{
+abstract class IntegrationSpec extends Specification {
 
     static {
         PostgresContainerStarter.init()
         System.setProperty("spring.datasource.url", PostgresContainerStarter.getPostgreSQLContainer().getJdbcUrl())
         System.setProperty("spring.datasource.username", PostgresContainerStarter.getPostgreSQLContainer().getUsername())
         System.setProperty("spring.datasource.password", PostgresContainerStarter.getPostgreSQLContainer().getPassword())
-        System.setProperty("INTEGRATION", "true")
     }
-     MockMvc mockMvc
+    MockMvc mockMvc
 
     @Autowired
     private WebApplicationContext context
@@ -34,15 +34,16 @@ abstract class IntegrationSpec extends Specification{
     @Autowired
     ObjectMapper om;
 
-    def setup(){
+    def setup() {
         mockMvc = MockMvcBuilders
                 .webAppContextSetup(context)
+                .apply(SecurityMockMvcConfigurers.springSecurity())
                 .build()
     }
 
     def cleanup() {
-        mockMvc.perform(MockMvcRequestBuilders.post("/api/auth/cleanup").contentType(MediaType.APPLICATION_JSON)) ;
-
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/auth/cleanup").contentType(MediaType.APPLICATION_JSON));
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/room/cleanup").contentType(MediaType.APPLICATION_JSON));
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/reservation/cleanup").contentType(MediaType.APPLICATION_JSON));
     }
-
 }

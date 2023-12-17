@@ -107,5 +107,8 @@ public class RoomFacade {
         return roomRepository.existsByNumber(roomNumber);
     }
 
-
+    public void cleanup() {
+        roomRepository.deleteAll();
+        typeOfRoomRepository.deleteAll();
+    }
 }

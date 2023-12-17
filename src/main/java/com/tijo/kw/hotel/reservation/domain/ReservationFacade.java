@@ -115,4 +115,8 @@ public class ReservationFacade {
 
         return types.stream().filter(t -> typesWithRoomsIds.contains(t.getId())).distinct().collect(Collectors.toList());
     }
+
+    public void  cleanup(){
+        reservationRepository.deleteAll();
+    }
 }

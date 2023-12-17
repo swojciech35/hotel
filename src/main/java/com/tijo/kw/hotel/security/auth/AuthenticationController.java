@@ -1,6 +1,7 @@
 package com.tijo.kw.hotel.security.auth;
 
 import com.tijo.kw.hotel.security.auth.exception.InvalidEmailAddressException;
+import io.swagger.v3.oas.annotations.Hidden;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -40,6 +41,7 @@ public class AuthenticationController {
 
   }
 
+  @Hidden
   @PostMapping("/cleanup")
   public ResponseEntity<Boolean> cleanup() {
     service.cleanup();

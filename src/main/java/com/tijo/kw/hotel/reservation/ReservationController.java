@@ -7,6 +7,7 @@ import com.tijo.kw.hotel.reservation.dto.ReservationDto;
 import com.tijo.kw.hotel.reservation.dto.ReservationRangeDto;
 import com.tijo.kw.hotel.room.dto.RoomDto;
 import com.tijo.kw.hotel.room.dto.TypeOfRoomDto;
+import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -48,5 +49,12 @@ public class ReservationController {
     @Operation(summary = "Returns list of types of room' that haveat least one room")
     public ResponseEntity<List<TypeOfRoomDto>> getTypesOfRoomWithRooms() {
         return ResponseEntity.ok(reservationFacade.getTypesOfRoomWithRooms());
+    }
+
+    @Hidden
+    @PostMapping("/cleanup")
+    public ResponseEntity<Boolean> cleanup() {
+        reservationFacade.cleanup();
+        return ResponseEntity.ok(true);
     }
 }
