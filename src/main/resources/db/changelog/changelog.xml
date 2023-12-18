@@ -4,6 +4,19 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                    https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
+        <changeSet id="1" author="k.baczek">
+            <sqlFile path="db/changelog/sql/1-KB.sql" splitStatements="true" endDelimiter=";" stripComments="true"></sqlFile>
+            <comment>dodanie tabel reservations, users, types of room i rooms</comment>
+        </changeSet>
+    <changeSet id="2" author="w.schabowski">
+        <sqlFile path="db/changelog/sql/2-ws.sql" splitStatements="true" endDelimiter=";" stripComments="true"></sqlFile>
+        <comment>dodanie w tabeli user password i usunięcie kolumny phone number</comment>
+    </changeSet>
+
+    <changeSet id="3" author="k.baczek">
+        <sqlFile path="db/changelog/sql/3-KB.sql" splitStatements="true" endDelimiter=";" stripComments="true"></sqlFile>
+        <comment>przeniesienie photoUrl z room do typeofroom</comment>
+    </changeSet>
 
     <!--    example-->
     <!--    <changeSet id="1" author="autor">-->
