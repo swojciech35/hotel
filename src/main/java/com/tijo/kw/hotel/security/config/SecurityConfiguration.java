@@ -34,7 +34,7 @@ public class SecurityConfiguration {
                     .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                     .requestMatchers(HttpMethod.POST, "/api/auth/register","/api/auth/authenticate", "api/reservation/available").permitAll()
                     .requestMatchers(HttpMethod.GET, "/api/reservation").permitAll()
-                    .requestMatchers(HttpMethod.POST, "/api/reservation").hasAuthority(Role.USER.name())
+                    .requestMatchers(HttpMethod.POST, "/api/reservation/").hasAuthority(Role.USER.name())
                     .requestMatchers(HttpMethod.POST, "/api/**").hasAuthority(Role.ADMIN.name())
                     .requestMatchers(HttpMethod.GET, "/api/**").hasAuthority(Role.ADMIN.name())
                     .requestMatchers(HttpMethod.DELETE, "/api/**").hasAuthority(Role.ADMIN.name())
