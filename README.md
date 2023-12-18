@@ -2,13 +2,11 @@
 
 ## Testowanie i jakość oprogramowania- projekt
 
-***
-
 ## Temat projektu
 
 ### Testowanie systemu wynajmu pokoi
 
-***
+
 **Opis:**<br>
 Aplikacja pozwala użytkownikom na przeglądanie dostępnych pokoi ogólnie w hotelu oraz w podanym terminie. W wypadku, gdy
 użytkownik jest zalogowany, może zarezerwować interesujący go pokój na dany termin.<br>
@@ -22,7 +20,6 @@ rezerwacje, pokoje oraz rodzaje pokoi. Ma również możliwość dodawania nowyc
 
 ### Autorzy
 
-***
 
 | Imię i Nazwisko     | Index |
 |---------------------|-------|
@@ -31,7 +28,6 @@ rezerwacje, pokoje oraz rodzaje pokoi. Ma również możliwość dodawania nowyc
 
 ## Uruchomienie Aplikacji
 
-***
 
 1. Sklonuj aplikacje:
     * backend: `git clone https://github.com/swojciech35/hotel.git `
@@ -52,7 +48,6 @@ rezerwacje, pokoje oraz rodzaje pokoi. Ma również możliwość dodawania nowyc
 
 ## Uruchomienie testów
 
-***
 Do utuchomienia testów integracyjnych wymagany jest docker.
 
 **Aby uruchomić wszystkie testy jednostkowe i integracyjne należy:**
@@ -62,7 +57,6 @@ Do utuchomienia testów integracyjnych wymagany jest docker.
 
 ## Scenariusze testowe dla testera manualnego
 
-***
 Zakładamy, że istnieje jeden typ pokoju z jednym pokojem.
 
 | Test <br/>Case ID | Opis                                                                                                     | Kroki testowe                                                                                                                                                                                                  | Oczekiwany wynik                                                                                                                     |
@@ -80,13 +74,10 @@ Zakładamy, że istnieje jeden typ pokoju z jednym pokojem.
 
 ## Dokumentacja API
 
-***
 
 Dokumentacja api dostępna jest pod adresem `http://localhost:8080/swagger-ui/index.html#/` po uruchomieniu aplikacji.
 
 ## Użyte technologie
-
-***
 
 * Java 17
 * Spring boot
