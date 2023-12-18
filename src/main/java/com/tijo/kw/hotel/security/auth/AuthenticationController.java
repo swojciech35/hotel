@@ -37,9 +37,9 @@ public class AuthenticationController {
       AuthenticationResponse response = service.authenticate(request);
       return ResponseEntity.ok(response);
     } catch (InvalidEmailAddressException e) {
-      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new AuthenticationResponse("Nieprawidłowy adres email"));
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new AuthenticationResponse("Incorrect email address."));
     } catch (Exception e) {
-      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new AuthenticationResponse("Wystąpił błąd serwera"));
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new AuthenticationResponse("Serwer error."));
     }
 
   }
