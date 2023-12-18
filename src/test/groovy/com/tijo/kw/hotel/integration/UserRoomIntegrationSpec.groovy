@@ -10,7 +10,9 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 
 class UserRoomIntegrationSpec extends IntegrationSpec implements UserSample, RoomSample {
     def setup() {
+        given: "There is user with role USER"
         mockMvc.perform(MockMvcRequestBuilders.post("/api/auth/register").contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsString(REGISTER_REQUEST)))
+        and: "The user is logged in"
         mockMvc.perform(MockMvcRequestBuilders.post("/api/auth/authenticate").contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsString(AUTHENTICATION_REQUEST)))
     }
 
@@ -25,14 +27,14 @@ class UserRoomIntegrationSpec extends IntegrationSpec implements UserSample, Roo
     def "Logged user can't add new room"() {
         when: "User tries to add room"
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/api/room").contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsString(createRoom()))).andReturn()
-        then: "User can't add room"
+        then: "User can't add room and the status is 401"
         result.getResponse().status == 401
     }
 
     def "Logged user can't add new type of room"() {
         when: "User tries to add type of room"
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/api/room/type").contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsString(createTypeOfRoom()))).andReturn()
-        then: "User can't add room"
+        then: "User can't add room and the status is 401"
         result.getResponse().status == 401
     }
 }

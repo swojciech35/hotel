@@ -2,7 +2,6 @@ package com.tijo.kw.hotel
 
 import com.tijo.kw.hotel.room.domain.RoomFacade
 import com.tijo.kw.hotel.room.dto.RoomDto
-import com.tijo.kw.hotel.room.dto.TypeOfRoomDto
 import com.tijo.kw.hotel.room.exception.DuplicateNumberException
 import com.tijo.kw.hotel.room.exception.InvalidValuesException
 import com.tijo.kw.hotel.room.exception.RoomTypeNotExistingException
@@ -23,6 +22,7 @@ class RoomSpec extends Specification implements RoomSample {
     UUID typeId;
 
     def setup() {
+        given: "Type of room with id #typeId exists"
         typeId = roomFacade.addTypeOfRoom(createTypeOfRoomRequest()).getId()
     }
 

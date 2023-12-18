@@ -14,12 +14,12 @@ class AuthIntegrationSpec extends IntegrationSpec implements UserSample {
         result.getResponse().status == 200
     }
 
-    def "Guest shouldn't register on old email"() {
+    def "Guest shouldn't register on existing email"() {
         given: "Guest register on new email"
         mockMvc.perform(MockMvcRequestBuilders.post("/api/auth/register").contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsString(REGISTER_REQUEST)))
         when: "Guest register on the existing email"
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/api/auth/register").contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsString(REGISTER_REQUEST))).andReturn()
-        then: "Guest isn't registered"
+        then: "Guest isn't registered and the status is 409 (conflict)"
         result.getResponse().status == 409
     }
 
@@ -28,7 +28,7 @@ class AuthIntegrationSpec extends IntegrationSpec implements UserSample {
         mockMvc.perform(MockMvcRequestBuilders.post("/api/auth/register").contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsString(REGISTER_REQUEST)))
         when: "Guest log in with good credentials"
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/api/auth/authenticate").contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsString(AUTHENTICATION_REQUEST))).andReturn()
-        then: "Guest is logged in"
+        then: "Guest is successfully logged in"
         result.getResponse().status == 200
     }
 
