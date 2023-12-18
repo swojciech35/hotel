@@ -3,6 +3,7 @@ package com.tijo.kw.hotel.security.auth;
 import com.tijo.kw.hotel.security.auth.exception.InvalidEmailAddressException;
 import com.tijo.kw.hotel.security.auth.exception.UserAlreadyExists;
 import io.swagger.v3.oas.annotations.Hidden;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -19,6 +20,7 @@ public class AuthenticationController {
 
   @CrossOrigin(origins = "http://localhost:3000")
   @PostMapping(value = "/register")
+  @Operation(summary = "Register new user")
   public ResponseEntity<Boolean> register(@RequestBody RegisterRequest request) {
     try {
       boolean response = service.register((request));
@@ -32,6 +34,7 @@ public class AuthenticationController {
 
   @CrossOrigin(origins = "http://localhost:3000")
   @PostMapping(value = "/authenticate")
+  @Operation(summary = "Sign in")
   public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest request) {
     try {
       AuthenticationResponse response = service.authenticate(request);

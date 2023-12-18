@@ -9,11 +9,61 @@
 ### Testowanie systemu wynajmu pokoi
 
 ***
+**Opis:**<br>
+Aplikacja pozwala użytkownikom na przeglądanie dostępnych pokoi ogólnie w hotelu oraz w podanym terminie. W wypadku, gdy
+użytkownik jest zalogowany, może zarezerwować interesujący go pokój na dany termin.<br>
+W przypadku gdy zalogowany jest administrator, ma on dostęp do panelu administracyjnego, w którym może przeglądać
+rezerwacje, pokoje oraz rodzaje pokoi. Ma również możliwość dodawania nowych rodzajów pokoi oraz pokoi.
+
+* Strona główna
+  ![Strona glówna](https://cdn.discordapp.com/attachments/912663225630343178/1186347137391415456/image.png?ex=6592eade&is=658075de&hm=cc33f7b60d383ea47f3a466554c7606374a22bbaf9d6e6dd9de7681fcb825d31&)
+* Panel administratora
+  ![Panel administratora](https://cdn.discordapp.com/attachments/912663225630343178/1186352201732456610/image.png?ex=6592ef96&is=65807a96&hm=0d995186b801e63d2d24f7ccc55ade03a185e9d207e38dbac41b03900ef99305&)
+
+### Autorzy
+
+***
+
+| Imię i Nazwisko     | Index |
+|---------------------|-------|
+| Katarzyna Bączek    | 34270 |
+| Wojciech Schabowski | 34324 |
+
+## Uruchomienie Aplikacji
+
+***
+
+1. Sklonuj aplikacje:
+    * backend: `git clone https://github.com/swojciech35/hotel.git `
+    * frontend: `git clone https://github.com/swojciech35/hotel-frontend.git`
+2. Utwórz nową bazę danych w PostgreSQL
+3. Dodaj zmiene środowiskowe do aplikacji backendowej:
+    * `spring.datasource.username`   - nazwa użytkownika bazy danych (np. `postgres`)
+    * `spring.datasource.password`   - hasło użytkownika (np. `postgres`)
+    * `spring.datasource.url`   - link do bazy danych (np. `jdbc:postgresql://localhost:5432/hotel`)
+4. Uruchom aplikację backendową:
+    * uruchom aplikację- plik HotelApplication
+5. Uruchom aplikację frontendową:
+    * `npm install`
+    * `npm start`
+6. Aplikacje będą domyslnie dostępne pod adresem:
+    * frontend:`http://localhost:3000/`
+    * backend:`http://localhost:8080/` (swagger dostępny pod adresem: `http://localhost:8080/swagger-ui/index.html#`)
+
+## Uruchomienie testów
+
+***
+Do utuchomienia testów integracyjnych wymagany jest docker.
+
+**Aby uruchomić wszystkie testy jednostkowe i integracyjne należy:**
+
+1. Oznaczyć folder `test/groovy` i `test/java` jako `Test Sources Root`
+2. Kliknąć PPM na folder groovy i wybrać opcję `Run 'Tests in 'groovy''`
 
 ## Scenariusze testowe dla testera manualnego
 
 ***
-Zakładamy, że istnieje jeden typ pokoju z jednym pokojem. 
+Zakładamy, że istnieje jeden typ pokoju z jednym pokojem.
 
 | Test <br/>Case ID | Opis                                                                                                     | Kroki testowe                                                                                                                                                                                                  | Oczekiwany wynik                                                                                                                     |
 |-------------------|----------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
@@ -28,7 +78,24 @@ Zakładamy, że istnieje jeden typ pokoju z jednym pokojem.
 | TC_09             | Dodanie nowego pokoju o tym samym numerze przez Administratora.                                          | 1.Zaloguj się jako administrator.<br>2. Kliknij w plusik  w panelu administracyjnym znajdujący się w tabelce 'Pokoje'.<br>3. Wypełnij formularz z numerem pokoju 309.<br>4. Dodaj kolejny pokój z numerem 309. | Wybrany pokój nie zostanie dodany ponownie, nie może być pokoi o tych samych numerach.                                               | 
 | TC_10             | Dodanie nowego typu pokoju.- pokój 2-osobowy, 2-łóżka przez Administratora.                              | 1.Zaloguj się jako administrator.<br>2. Kliknij w plusik  w panelu administracyjnym znajdujący się w tabelce 'Rodzaje pokoi'.<br/>3.Wypełnij formularz 'pokój 2-osobowy, 2-łóżka'                              | Dodanie nowego typu pokoju - '2-osobowy 2-łóżka'.                                                                                    |
 
-## Autorzy
+## Dokumentacja API
 
-- Katarzyna Bączek
-- Wojciech Schabowski 
+***
+
+Dokumentacja api dostępna jest pod adresem `http://localhost:8080/swagger-ui/index.html#/` po uruchomieniu aplikacji.
+
+## Użyte technologie
+
+***
+
+* Java 17
+* Spring boot
+* Spock
+* Groovy
+* PostgreSQL
+* Liquibase
+* SpringSecurity
+* JWT
+* Docker
+* React
+* Typescript
