@@ -20,7 +20,7 @@ class AuthIntegrationSpec extends IntegrationSpec implements UserSample {
         when: "Guest register on the existing email"
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/api/auth/register").contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsString(REGISTER_REQUEST))).andReturn()
         then: "Guest isn't registered"
-        result.getResponse().status != 200
+        result.getResponse().status == 409
     }
 
     def "Guest should log in on existing account with good credentials"() {

@@ -26,14 +26,14 @@ public class ReservationController {
         this.reservationFacade = reservationFacade;
     }
 
-    @PostMapping(value = "")
+    @PostMapping(value = "/")
     @Operation(summary = "Makes reservation and returns full reservation")
     public ResponseEntity<ReservationDto> addReservation(@RequestBody MakeReservationDto makeReservation) {
         return ResponseEntity.ok(reservationFacade.makeReservation(makeReservation));
     }
 
 
-    @GetMapping(value = "all")
+    @GetMapping(value = "/all")
     @Operation(summary = "Return list of all made reservations")
     public ResponseEntity<List<FullReservationDto>> getReservations() {
         return ResponseEntity.ok(reservationFacade.getReservations());

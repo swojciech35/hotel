@@ -1,6 +1,7 @@
 package com.tijo.kw.hotel.security.auth;
 
 import com.tijo.kw.hotel.security.auth.exception.InvalidEmailAddressException;
+import com.tijo.kw.hotel.security.auth.exception.UserAlreadyExists;
 import io.swagger.v3.oas.annotations.Hidden;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +23,8 @@ public class AuthenticationController {
     try {
       boolean response = service.register((request));
       return ResponseEntity.ok(response);
+    } catch (UserAlreadyExists e) {
+      return ResponseEntity.status(409).build();
     } catch (Exception e) {
       return ResponseEntity.badRequest().build();
     }
